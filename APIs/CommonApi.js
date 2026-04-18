@@ -87,7 +87,7 @@ commonApp.post("/users", upload.single("profileImageUrl"), async (req, res, next
                 role:user.role,
                 firstName: user.firstName,
                 lastName: user.lastName,
-                proflieImageUrl:user.profileImageUrl
+                profileImageUrl:user.profileImageUrl
             },
             process.env.SECRET_KEY,
             {
@@ -100,8 +100,8 @@ commonApp.post("/users", upload.single("profileImageUrl"), async (req, res, next
         // store token in HTTP-only cookie
         res.cookie("token", signtoken, {
             httpOnly: true,
-            sameSite: 'none',
-            secure: true
+            sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+            secure: process.env.NODE_ENV === 'production'
         })
 
         // delete password
@@ -117,8 +117,8 @@ commonApp.post("/users", upload.single("profileImageUrl"), async (req, res, next
         // delete token from cookies storage
         res.clearCookie("token", {
             httpOnly: true,
-            sameSite: 'none',
-            secure: true
+            sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+            secure: process.env.NODE_ENV === 'production'
         })
         // send res
         res.status(200).json({message:"Logout success"})
