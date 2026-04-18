@@ -7,7 +7,7 @@ import { connect } from "mongoose";
 import { userApp } from "./APIs/UserApi.js";
 import { authorApp } from "./APIs/AuthorApi.js";
 import { adminApp } from "./APIs/AdminApi.js";
-import { commonApp } from "./APIs/CommonApi.js";
+import { commonApp } from "./APIs/CommonAPI.js";
 import cookieParser from "cookie-parser";
 import cors from 'cors'
 config();

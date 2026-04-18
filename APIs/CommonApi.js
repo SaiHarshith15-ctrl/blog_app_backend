@@ -98,10 +98,10 @@ commonApp.post("/users", upload.single("profileImageUrl"), async (req, res, next
         
 
         // store token in HTTP-only cookie
-        res.cookie("token",signtoken,{
+        res.cookie("token", signtoken, {
             httpOnly: true,
-            sameSite: 'lax',
-            secure: false
+            sameSite: 'none',
+            secure: true
         })
 
         // delete password
@@ -115,10 +115,10 @@ commonApp.post("/users", upload.single("profileImageUrl"), async (req, res, next
 // router for logout
     commonApp.get("/logout", (req,res)=>{
         // delete token from cookies storage
-        res.clearCookie("token",{
+        res.clearCookie("token", {
             httpOnly: true,
-            sameSite: 'lax',
-            secure: false
+            sameSite: 'none',
+            secure: true
         })
         // send res
         res.status(200).json({message:"Logout success"})
